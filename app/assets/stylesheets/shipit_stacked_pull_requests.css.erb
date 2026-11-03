@@ -1,0 +1,137 @@
+/* Expand/collapse pills */
+
+.accordion-toggle {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.accordion-toggle:before {
+  content: "";
+  display: inline-block;
+  margin-right: .4em;
+  border-top: .3em solid transparent;
+  border-bottom: .3em solid transparent;
+  border-left: .4em solid currentColor;
+  vertical-align: middle;
+  -webkit-transition: -webkit-transform .15s ease;
+          transition: transform .15s ease;
+}
+
+.accordion-toggle[aria-expanded="true"]:before {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.accordion-toggle--pill {
+  white-space: nowrap;
+  padding: .1rem .6rem;
+  border: 1px solid var(--grey-light);
+  border-radius: 1rem;
+  background-color: #fff;
+  line-height: 1.4;
+}
+
+.accordion-toggle--pill:hover,
+.accordion-toggle--pill[aria-expanded="true"] {
+  border-color: var(--blue);
+  background-color: rgba(36, 138, 242, .08);
+}
+
+.accordion-message {
+  margin: 0;
+  font-size: .875rem;
+  color: var(--grey);
+}
+
+.deploy-commits-toggle, .pull-request-stack-toggle {
+  margin-left: .25rem;
+  color: var(--blue);
+}
+
+/* Rows that expand: the panel goes on its own line below the row, on desktop where rows are horizontal. */
+
+@media (min-width: 1000px) {
+  .deploy, .commit--stack-head {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .deploy > .commit-details, .commit--stack-head > .commit-details {
+    -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+  }
+}
+
+/* Let the toggles and stack warnings wrap rather than be cut off with the rest of the details. */
+.commit--stack-head > .commit-details > .commit-meta,
+.deploy > .commit-details > .commit-meta {
+  white-space: normal;
+}
+
+/* Previous deploys */
+
+.deploy-commits {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  padding-top: .75rem;
+}
+
+.deploy-commits .commit-summary-list {
+  margin: 0;
+}
+
+@media (min-width: 1000px) {
+  .deploy-commits {
+    padding-left: calc(10em + 1rem + 2.25rem + .75rem);
+  }
+}
+
+/* Stacked pull requests */
+
+.icon--stack {
+  display: inline-block;
+  margin-right: .3em;
+  background-color: currentColor;
+  mask: url(<%= asset_data_uri "shipit_stacked_pull_requests/stack.svg" %>) no-repeat 50% 50% / contain;
+  height: 1em;
+  width: 1em;
+  vertical-align: -.15em;
+}
+
+.pull-request-stack-warning {
+  margin-left: .5rem;
+  color: var(--bright-red);
+  white-space: nowrap;
+}
+
+.pull-request-stack {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  margin-top: .75rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--grey-light);
+}
+
+/*
+ * Shipit styles a locked commit's lock with descendant selectors, which also match the commits nested under a
+ * locked stack head. Give the nested commits that aren't locked themselves their unlocked look back.
+ */
+.commit.locked .pull-request-stack .commit:not(.locked) > .commit-lock .icon {
+  background-color: #ddd;
+}
+
+.commit.locked .pull-request-stack .commit:not(.locked) > .commit-lock:hover .icon {
+  background-color: #aaaaaa;
+}
+
+.commit.locked .pull-request-stack .commit:not(.locked) > .commit-lock .action-lock-commit {
+  display: inline;
+}
+
+.commit.locked .pull-request-stack .commit:not(.locked) > .commit-lock .action-unlock-commit {
+  display: none;
+}
