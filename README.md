@@ -1,11 +1,45 @@
-# shipit-stacked-pull-requests
+<p align="center">
+  <img src="docs/logo.svg" width="112" alt="">
+</p>
+
+<h1 align="center">shipit-stacked-pull-requests</h1>
 
 A [Shipit](https://github.com/Shopify/shipit-engine) extension for teams using [GitHub stacked pull requests](https://docs.github.com/en/pull-requests/get-started/about-stacked-prs).
+
+![A Shipit stack page with a stack of five pull requests expanded under the newest one, and a previous deploy expanded to list its commits](docs/screenshots/overview.png)
 
 On a stack page it:
 
 - **Groups stacked pull requests:** the undeployed and currently deploying commits of the same GitHub stack are nested under the newest one. That one keeps its deploy button, which ships the whole stack, and gets a "Stack of N" pill to expand or collapse the earlier ones. A warning such as "1 failing · 1 locked" tells you when a nested pull request needs attention.
 - **Expands previous deploys:** each deploy or rollback can expand to list the commits it shipped or reverted, loaded on demand.
+
+## Before and after
+
+### Stacked pull requests
+
+<table>
+  <tr>
+    <th>Before</th>
+    <th>After</th>
+  </tr>
+  <tr>
+    <td width="50%" valign="top"><img src="docs/screenshots/commits-before.png" alt="Undeployed commits without the extension: every pull request of a stack is its own row"></td>
+    <td width="50%" valign="top"><img src="docs/screenshots/commits-after.png" alt="Undeployed commits with the extension: the pull requests of each stack are nested under the newest one, with a Stack of N pill and a 1 failing · 1 locked warning"></td>
+  </tr>
+</table>
+
+### Previous deploys
+
+<table>
+  <tr>
+    <th>Before</th>
+    <th>After</th>
+  </tr>
+  <tr>
+    <td width="50%" valign="top"><img src="docs/screenshots/deploys-before.png" alt="Previous deploys without the extension, with no way to see which commits each one shipped"></td>
+    <td width="50%" valign="top"><img src="docs/screenshots/deploys-after.png" alt="Previous deploys with the extension: a deploy expanded to list the four commits it shipped"></td>
+  </tr>
+</table>
 
 ## Requirements
 
